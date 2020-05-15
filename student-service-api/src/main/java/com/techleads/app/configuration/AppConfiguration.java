@@ -30,7 +30,7 @@ public class AppConfiguration {
 	 * .build(); }
 	 */
 	 
-	 @Bean
+	/* @Bean
 	 public Docket api() {                
 	     return new Docket(DocumentationType.SWAGGER_2)          
 	       .select()
@@ -39,8 +39,18 @@ public class AppConfiguration {
 	       .paths(PathSelectors.any())
 	       .build()
 	       .apiInfo(apiInfo());
-	 }
+	 }*/
 	 
+	 @Bean
+	 public Docket docket() {
+		return  new Docket(DocumentationType.SWAGGER_2)
+		 .select() //select all rest controllers
+		 .apis(RequestHandlerSelectors.basePackage("com.techleads.app.controller")) //inside package
+		 .paths(PathSelectors.regex("/students.*")) //starting path
+		 .build()
+		 .apiInfo(apiInfo());
+		
+	 }
 	
 	 private ApiInfo apiInfo() {
 	     return new ApiInfo(
